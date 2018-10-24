@@ -1,27 +1,6 @@
 import re
 import unittest
 
-
-### 1)  Write a function sumNums(filename) to read from a file when given 
-## the filename and look for integers (that are not phone numbers) using the 
-## re.findall(), and then convert the extracted strings to integers and 
-## return the sum of the integers. 
-
-## 2)   Write a function countWord(filename,word) to return a count of the 
-## number of times a specified word appears in a file.  It should match the 
-## word when it starts a sentence also (starts with a capital letter). It 
-## should not match any additional letters after the word.  For example, if 
-## called on “computer” it should match “Computer” and “computer” but not 
-## “computers”.  For file regex_sum_42.txt it will return 21 when called 
-## with the word “computer”.   
-
-## 3)   Write a function listURLs(fileName) to return a list of the URLs 
-## in the file when given the file name.  It should match URLs like 
-## www.cnn.com.  It doesn’t have to return the http:// part or the https:// 
-## part of the URL, but it can.  For file regex_sum_42.txt it will return a 
-## list of three URLs. 
-
-
 def sumNums(fileName):
     inFile = open(fileName, 'r')
     line = inFile.readline()
@@ -40,13 +19,13 @@ def sumNums(fileName):
 
 def countWord(fileName, word):
     inFile = open(fileName, 'r')
-    line = inFile.readline()
+    numOfWordAppearances = 0
 
-
-
-
-
-
+    for c in inFile:
+        collectedWords = re.findall(r'\b'+ word + r'\b', c.lower())
+        numOfWordAppearances += len(collectedWords)
+    inFile.close()
+    return numOfWordAppearances
 
 
 
@@ -64,6 +43,7 @@ def listURLs(fileName):
     newList = [c for c in listURL if c]
     return newList
 
+##### TEST CASES DON'T EDIT #####
 
 class TestHW6(unittest.TestCase):
     """ Class to test this homework """
